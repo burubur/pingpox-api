@@ -60,13 +60,13 @@ func (b *BookingService) CreateBooking(ctx context.Context, request BookingReque
 	// 2. b.postgreSQL.insertBookingData()
 	generatedBookingID := uuid.New()
 	bookingData := types.Bookings{
-		ID:         generatedBookingID,
-		UserID:     request.UserID,
-		CoachID:    request.CoachID,
-		CourtID:    request.CourtID,
-		DateTime:   request.DateTime,
-		Duration:   request.Duration,
-		LastStatus: types.StatusCreated,
+		ID:                generatedBookingID,
+		UserID:            request.UserID,
+		CoachID:           request.CoachID,
+		CourtID:           request.CourtID,
+		DateTime:          request.DateTime,
+		DurationInMinutes: int(request.Duration.Minutes()),
+		LastStatus:        types.StatusCreated,
 	}
 
 	bookingID, bookingErr := b.repository.StoreBookingCreationData(ctx, bookingData)

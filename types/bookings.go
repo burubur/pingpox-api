@@ -7,15 +7,15 @@ import (
 )
 
 type Bookings struct {
-	ID         uuid.UUID // uuid
-	CoachID    uuid.UUID // uuid
-	UserID     uuid.UUID // uuid
-	DateTime   time.Time
-	CourtID    string // uuid
-	Duration   time.Duration
-	LastStatus TypeStatus // created, paid, confirmed, started, completed/cancelled/aborted
-	CreatedAt  time.Time  // timestamp
-	UpdatedAt  time.Time  // timestamp
+	ID                uuid.UUID // uuid
+	UserID            uuid.UUID // uuid
+	CoachID           uuid.UUID // uuid
+	CourtID           string    // uuid
+	DateTime          time.Time
+	DurationInMinutes int
+	LastStatus        TypeStatus // created, paid, confirmed, started, completed/cancelled/aborted
+	CreatedAt         time.Time  // timestamp
+	UpdatedAt         time.Time  // timestamp
 }
 
 type BookingHistories struct {
