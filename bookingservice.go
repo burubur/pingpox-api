@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate mockgen -source=bookingservice.go -destination=mocks/repository_mock.go -package=mocks RepositoryManager
 type RepositoryManager interface {
 	StoreBookingCreationData(context.Context, types.Bookings) (uuid.UUID, error)
 	FetchBookingData(context.Context, uuid.UUID) (types.Bookings, error)
@@ -44,8 +45,11 @@ type BookingResult struct {
 	LastStatus string
 }
 
-func NewBookingService() BookingService {
-	return BookingService{}
+func NewBookingService(repository RepositoryManager, eventManager EventManager) BookingService {
+	return BookingService{
+		repository:   repository,
+		eventManager: eventManager,
+	}
 }
 
 // performed by user/trainee
